@@ -28,7 +28,7 @@ export class MainPanelComponent implements AfterViewInit {
     this.cardContainer.nativeElement.addEventListener('wheel', (event: WheelEvent) => {
         if (event.deltaY !== 0) {
             event.preventDefault();
-            const scrollAmount = event.deltaY > 0 ? 200 : -200; 
+            const scrollAmount = event.deltaY > 0 ? 100 : -100; 
             this.cardContainer.nativeElement.scrollLeft += scrollAmount; 
         }
     });

@@ -7,7 +7,6 @@
   padding: 20px;
   white-space: nowrap;
   scrollbar-width: none; 
-  scroll-behavior: smooth;
 }
 
 .card-container::-webkit-scrollbar {
