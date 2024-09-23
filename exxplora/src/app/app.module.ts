@@ -10,6 +10,7 @@ import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MainPanelComponent } from './components/main-panel/main-panel.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     LeftMenuComponent,
     ProfileCardComponent,
     HeaderComponent,
-    NavbarComponent
+    NavbarComponent,
+    MainPanelComponent
   ],
   imports: [
     BrowserModule,
