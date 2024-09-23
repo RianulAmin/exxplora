@@ -11,6 +11,8 @@ import { ProfileCardComponent } from './components/profile-card/profile-card.com
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainPanelComponent } from './components/main-panel/main-panel.component';
+import { RightMenuComponent } from './components/right-menu/right-menu.component';
+import { DomainCardComponent } from './components/domain-card/domain-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { MainPanelComponent } from './components/main-panel/main-panel.component
     ProfileCardComponent,
     HeaderComponent,
     NavbarComponent,
-    MainPanelComponent
+    MainPanelComponent,
+    RightMenuComponent,
+    DomainCardComponent
   ],
   imports: [
     BrowserModule,

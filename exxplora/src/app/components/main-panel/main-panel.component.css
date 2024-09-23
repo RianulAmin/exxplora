@@ -1,0 +1,6 @@
+.card-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; 
+    margin: 20px; 
+  }

@@ -1,0 +1,30 @@
+  .card {
+    width: 180px;
+    height: 250px; /* Taller height to make it vertical */
+    background-image: url('https://via.placeholder.com/180x250');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .card-text {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  .card-title {
+    font-size: 16px; /* Adjusted for a vertical layout */
+    margin: 0;
+  }
+  
+  .card-description {
+    font-size: 12px;
+    margin: 5px 0 0;
+  }
+  
