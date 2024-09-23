@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CardModule } from 'primeng/card';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +30,8 @@ import { DomainCardComponent } from './components/domain-card/domain-card.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CardModule
+    CardModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
