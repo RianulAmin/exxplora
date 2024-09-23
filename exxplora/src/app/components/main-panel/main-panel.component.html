@@ -1,4 +1,4 @@
-<div class="card-container" #cardContainer infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="300" (scrolledRight)="onScroll()" [scrollWindow]="false">
+<div class="card-container" #cardContainer infiniteScroll [scrollWindow]="false">
   <app-domain-card 
     *ngFor="let card of cards"
     [title]="card.title" 

@@ -1,12 +1,12 @@
 .card-container {
   display: flex;
-  flex-wrap: nowrap; /* Prevent wrapping */
-  gap: 10px; /* Adjust the gap between the cards */
-  overflow-x: auto; /* Enable horizontal scrolling */
-  height: auto; /* Adjust height as necessary */
+  flex-wrap: nowrap; 
+  gap: 10px;
+  overflow-x: auto; 
+  height: auto; 
   padding: 20px;
   white-space: nowrap;
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  scrollbar-width: none; 
 }
 
 .card-container::-webkit-scrollbar {

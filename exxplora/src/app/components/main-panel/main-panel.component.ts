@@ -3,10 +3,10 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 @Component({
   selector: 'app-main-panel',
   templateUrl: './main-panel.component.html',
-  styleUrls: ['./main-panel.component.css'] // Correct this to styleUrls
+  styleUrls: ['./main-panel.component.css'] 
 })
 export class MainPanelComponent implements AfterViewInit {
-  @ViewChild('cardContainer') cardContainer!: ElementRef; // Declare cardContainer
+  @ViewChild('cardContainer') cardContainer!: ElementRef;
 
   cards = [
     { title: 'Card Title 1', description: 'Short description 1', backgroundImage: '../../assets/images/domain-card.jpg' },
@@ -28,19 +28,9 @@ export class MainPanelComponent implements AfterViewInit {
     this.cardContainer.nativeElement.addEventListener('wheel', (event: WheelEvent) => {
         if (event.deltaY !== 0) {
             event.preventDefault();
-            const scrollAmount = event.deltaY > 0 ? 100 : -100; 
+            const scrollAmount = event.deltaY > 0 ? 50 : -50; 
             this.cardContainer.nativeElement.scrollLeft += scrollAmount; 
         }
     });
 }
-
-  onScroll() {
-    const newCards = [
-      { title: 'New Card Title 1', description: 'New description 1', backgroundImage: '../../assets/images/domain-card.jpg' },
-      { title: 'New Card Title 2', description: 'New description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-      // Add more new cards as needed...
-    ];
-    
-    this.cards = [...this.cards, ...newCards];
-  }
 }
