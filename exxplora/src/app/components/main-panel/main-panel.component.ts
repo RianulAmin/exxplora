@@ -26,12 +26,13 @@ export class MainPanelComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.cardContainer.nativeElement.addEventListener('wheel', (event: WheelEvent) => {
-      if (event.deltaY !== 0) {
-        event.preventDefault();
-        this.cardContainer.nativeElement.scrollLeft += event.deltaY;
-      }
+        if (event.deltaY !== 0) {
+            event.preventDefault();
+            const scrollAmount = event.deltaY > 0 ? 100 : -100; 
+            this.cardContainer.nativeElement.scrollLeft += scrollAmount; 
+        }
     });
-  }
+}
 
   onScroll() {
     const newCards = [

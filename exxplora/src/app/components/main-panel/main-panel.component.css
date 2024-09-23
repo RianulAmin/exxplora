@@ -9,7 +9,6 @@
   scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
-/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
 .card-container::-webkit-scrollbar {
   display: none;
 }
