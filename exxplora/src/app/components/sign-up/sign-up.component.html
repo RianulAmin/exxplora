@@ -44,7 +44,7 @@
       <span class="agreement-text">By clicking Agree & Join, you agree to the Exxplora User Agreement, Privacy Policy, and Cookie Policy.</span>
       <div class="buttons">
         <div style="margin-bottom: 20px;">
-          <p-button label="Agree & Join" [style]="{width: '100%'}" [rounded]="true" [disabled]="signUpForm.invalid"></p-button>
+          <p-button label="Agree & Join" (click)="handleSubmit()" [style]="{width: '100%'}" [rounded]="true" [disabled]="signUpForm.invalid"></p-button>
         </div>
       </div>
       <div class="divider">

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EmailType, MailServiceService } from '../../services/mail-service.service';
+import { RegistrationService } from '../../services/registration.service';
 
 
 @Component({
@@ -8,12 +9,15 @@ import { EmailType, MailServiceService } from '../../services/mail-service.servi
   styleUrl: './otp-verification.component.css'
 })
 export class OtpVerificationComponent {
-  constructor() { }
+  constructor(private registrationService: RegistrationService) { }
 
   otp: string = ''
 
   handleSubmit = async () => {
-    
+    if(this.otp == "ager page theke pawa otp"){
+      //this.registrationService.registerUser(oi user object ta)
+      //then redirect
+    }
   }
 
 }

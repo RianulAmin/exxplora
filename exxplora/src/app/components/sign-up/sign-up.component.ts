@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EmailType, MailServiceService } from '../../services/mail-service.service';
+import { RegistrationInfo } from '../../interfaces/registrationInfo';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,9 +9,9 @@ import { EmailType, MailServiceService } from '../../services/mail-service.servi
 })
 export class SignUpComponent {
 
-  constructor(private mailService: MailServiceService){}
+  constructor(private mailService: MailServiceService) { }
 
-  user = {
+  user: RegistrationInfo = {
     firstName: '',
     lastName: '',
     email: '',
@@ -18,10 +19,21 @@ export class SignUpComponent {
     confirmPassword: ''
   };
 
-  send = async () => {
-    let res = await this.mailService.sendOTP("2580", "asrafulalam9454@gmail.com", EmailType.CREATE_ACCOUNT_VERIFICATION);
-    if (res) alert("OTP send");
-    else alert("Failed to send OTP");
+
+  handleSubmit = async () => {
+    //validation -------- 
+
+
+    let generatedOtp = this.generateOtp();
+
+    let res = await this.mailService.sendOTP(generatedOtp, this.user.email, EmailType.CREATE_ACCOUNT_VERIFICATION);
+    if (res) {
+      //navigate to otp verification
+      //bind user object and otp
+    }
+    else {
+      //show error (mail send failed)
+    }
   }
 
   generateOtp = () => {
