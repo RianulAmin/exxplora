@@ -14,6 +14,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { FileUploadModule } from 'primeng/fileupload';
+import { InputOtpModule } from 'primeng/inputotp';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { MainPanelComponent } from './components/main-panel/main-panel.component
 import { RightMenuComponent } from './components/right-menu/right-menu.component';
 import { DomainCardComponent } from './components/domain-card/domain-card.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { OtpVerificationComponent } from './components/otp-verification/otp-verification.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MainPanelComponent,
     RightMenuComponent,
     DomainCardComponent,
-    SignUpComponent
+    SignUpComponent,
+    OtpVerificationComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     ChipsModule,
     FileUploadModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    InputOtpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

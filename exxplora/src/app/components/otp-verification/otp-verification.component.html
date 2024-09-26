@@ -1,0 +1,27 @@
+<div class="otp-verification-container">
+    <form #otpVerificationForm="ngForm" novalidate>
+      <div class="otp-verification-form">
+        <div class="otp">
+          <span class="label">Enter OTP</span>
+          <p-inputOtp [(ngModel)]="otp">
+            <ng-template pTemplate="input" let-token let-events="events">
+                <input 
+                    pInputText 
+                    class="custom-otp-input" 
+                    (input)="events.input($event)" 
+                    (keydown)="events.keydown($event)" 
+                    type="text" 
+                    [attr.value]="token" 
+                    [maxLength]="1" />
+            </ng-template>
+        </p-inputOtp>
+        </div>
+          <div class="buttons">
+          <div style="margin-bottom: 20px;">
+            <p-button label="Verify" [style]="{width: '10%'}" [rounded]="true" [disabled]="otpVerificationForm.invalid"></p-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
