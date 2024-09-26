@@ -1,8 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { CardModule } from 'primeng/card';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { CalendarModule } from 'primeng/calendar';
+import { ChipsModule } from 'primeng/chips';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +25,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainPanelComponent } from './components/main-panel/main-panel.component';
 import { RightMenuComponent } from './components/right-menu/right-menu.component';
 import { DomainCardComponent } from './components/domain-card/domain-card.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +37,25 @@ import { DomainCardComponent } from './components/domain-card/domain-card.compon
     NavbarComponent,
     MainPanelComponent,
     RightMenuComponent,
-    DomainCardComponent
+    DomainCardComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CardModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    InputTextareaModule,
+    CheckboxModule,
+    ToggleButtonModule,
+    CalendarModule,
+    ChipsModule,
+    FileUploadModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
