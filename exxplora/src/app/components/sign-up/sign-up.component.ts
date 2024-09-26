@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { EmailType, MailServiceService } from '../../services/mail-service.service';
 import { RegistrationInfo } from '../../interfaces/registrationInfo';
+import { Router } from '@angular/router';
+import { RegistrationService } from '../../services/registration.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,36 +11,50 @@ import { RegistrationInfo } from '../../interfaces/registrationInfo';
 })
 export class SignUpComponent {
 
-  constructor(private mailService: MailServiceService) { }
-
-  user: RegistrationInfo = {
+  user = {
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: ''
   };
+  
+  generatedOtp: string = '';
 
+  constructor(
+    private router: Router, 
+    private registrationService: RegistrationService,
+    private mailService: MailServiceService
+  ) {}
 
-  handleSubmit = async () => {
-    //validation -------- 
-
-
-    let generatedOtp = this.generateOtp();
-
-    let res = await this.mailService.sendOTP(generatedOtp, this.user.email, EmailType.CREATE_ACCOUNT_VERIFICATION);
-    if (res) {
-      //navigate to otp verification
-      //bind user object and otp
-    }
-    else {
-      //show error (mail send failed)
-    }
+  passwordsMatch(): boolean {
+    return this.user.password === this.user.confirmPassword;
   }
 
-  generateOtp = () => {
-    const otp = Math.floor(1000 + Math.random() * 9000);
-    return otp.toString();
+  generateOtp(): string {
+    return Math.floor(1000 + Math.random() * 9000).toString();
   }
 
+  async handleSubmit(signUpForm: any) {
+    if (signUpForm.valid && this.passwordsMatch()) {
+      this.generatedOtp = this.generateOtp();
+      const res = await this.mailService.sendOTP(this.generatedOtp, this.user.email, EmailType.CREATE_ACCOUNT_VERIFICATION);
+      
+      if (res) {
+        this.router.navigate(['/otp-verification'], {
+          state: {
+            otp: this.generatedOtp, 
+            email: this.user.email, 
+            firstName: this.user.firstName,
+            lastName: this.user.lastName,
+            password: this.user.password
+          }
+        });
+      } else {
+        alert('Failed to send OTP. Please try again.');
+      }
+    } else {
+      alert('Please ensure all fields are filled correctly and passwords match.');
+    }
+  }
 }
