@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { RegistrationService } from '../../services/registration.service';
 import { RegistrationInfo } from '../../interfaces/registrationInfo';
 
-
 @Component({
   selector: 'app-otp-verification',
   templateUrl: './otp-verification.component.html',
@@ -35,15 +34,13 @@ export class OtpVerificationComponent {
   }
 
   handleSubmit() {
-    if (this.otpInput === this.generatedOtp) {
-
+    if (this.otpInput == this.generatedOtp) {
       const registrationInfo: RegistrationInfo = {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
         password: this.password
       };
-
       this.registrationService.registerUser(registrationInfo).subscribe(
         (response) => {
           alert('Registration successful!');
