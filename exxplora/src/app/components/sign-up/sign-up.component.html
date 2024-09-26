@@ -1,6 +1,6 @@
-<div class="sign-up-container">
+<body>
+<div class="sign-up-form">
   <form #signUpForm="ngForm" novalidate>
-    <div class="sign-up-form">
       <div class="name">
         <div class="firstname">
           <span class="label">First Name</span>
@@ -17,7 +17,6 @@
           </div>
         </div>
       </div>
-
       <div class="email">
         <span class="label">Email</span>
         <input type="email" name="email" placeholder="e.g. rianulamin.r@gmail.com" pInputText class="input" [(ngModel)]="user.email" #email="ngModel" required email />
@@ -26,7 +25,6 @@
           <small *ngIf="email.errors?.['email']">Invalid email address</small>
         </div>
       </div>
-
       <div class="password">
         <span class="label">Password</span>
         <input type="password" name="password" placeholder="4+ characters" pInputText class="input" [(ngModel)]="user.password" #password="ngModel" required minlength="4" />
@@ -35,7 +33,6 @@
           <small *ngIf="password.errors?.['minlength']">Password must be at least 4 characters long</small>
         </div>
       </div>
-
       <div class="confirm-password">
         <span class="label">Confirm Password</span>
         <input type="password" name="confirmPassword" placeholder="Re-enter password" pInputText class="input" [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" required />
@@ -44,20 +41,18 @@
           <small *ngIf="confirmPassword.errors?.['compare']">Passwords do not match</small>
         </div>
       </div>
-
       <span class="agreement-text">By clicking Agree & Join, you agree to the Exxplora User Agreement, Privacy Policy, and Cookie Policy.</span>
       <div class="buttons">
         <div style="margin-bottom: 20px;">
           <p-button label="Agree & Join" [style]="{width: '100%'}" [rounded]="true" [disabled]="signUpForm.invalid"></p-button>
         </div>
       </div>
-
       <div class="divider">
         <span class="divider-text">or</span>
       </div>
       <div class="signin-option">
         <span>Already an Exxplorer? <a href="#">Sign in now</a></span>
       </div>
-    </div>
   </form>
-</div>
+</div>  
+</body>
