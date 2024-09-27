@@ -52,7 +52,8 @@ export class OtpVerificationComponent {
 
       this.registrationService.registerUser(registrationInfo).subscribe(
         (response) => {
-          alert('Registration successful!');
+          console.log(response.messages);
+          //alert('Registration successful!');
           this.dataTransferService.clearData();
           this.router.navigate(['/success']);
         },
