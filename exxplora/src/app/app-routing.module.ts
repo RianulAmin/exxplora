@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { OtpVerificationComponent } from './components/otp-verification/otp-verification.component';
+import { ProfileSetupComponent } from './components/profile-setup/profile-setup.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
     path: 'otp-verification',
     component: OtpVerificationComponent
   },
+  {
+    path: 'profile-setup',
+    component: ProfileSetupComponent
+  }
 ];
 
 @NgModule({

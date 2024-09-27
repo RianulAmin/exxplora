@@ -21,13 +21,11 @@
             <small>OTP is required</small>
           </div>
         </div>
-
         <div class="buttons">
           <div style="margin-bottom: 20px;">
             <p-button label="Verify" type="submit" [style]="{width: '100%'}" [rounded]="true"></p-button>
           </div>
         </div>
-
         <div class="resend-option">
           <span>Didn't receive the OTP? 
             <button type="button" (click)="resendOtp()" [disabled]="resendOtpDisabled">Resend OTP</button>
