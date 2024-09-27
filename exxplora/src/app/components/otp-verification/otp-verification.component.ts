@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RegistrationInfo } from '../../interfaces/registrationInfo';
 import { RegistrationService } from '../../services/registration.service';
 import { DataTransferService } from '../../services/data-transfer.service';
+import { EmailType, MailServiceService } from '../../services/mail-service.service';
 
 
 @Component({
@@ -18,11 +19,13 @@ export class OtpVerificationComponent {
   firstName: string = '';
   lastName: string = '';
   password: string = '';
+  isOtpSent: boolean = true;
+  resendOtpDisabled: boolean = false;  
 
   constructor(
     private router: Router, 
-    private route: ActivatedRoute,
     private registrationService: RegistrationService,
+    private mailService: MailServiceService,
     private dataTransferService: DataTransferService
   ) {}
 
@@ -37,10 +40,10 @@ export class OtpVerificationComponent {
     }
   }
 
-  handleSubmit() {
-    if (this.otpInput == this.generatedOtp) {
+  async handleSubmit() {
+    if (this.otpInput === this.generatedOtp) {
       alert('OTP verified successfully!');
-      const registrationInfo: RegistrationInfo = {
+      const registrationInfo = {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
@@ -59,6 +62,23 @@ export class OtpVerificationComponent {
       );
     } else {
       alert('Invalid OTP');
+    }
+  }
+
+  async resendOtp() {
+    this.resendOtpDisabled = true; 
+    this.generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();  
+    const res = await this.mailService.sendOTP(this.generatedOtp, this.email, EmailType.CREATE_ACCOUNT_VERIFICATION);
+    if (res) {
+      alert('A new OTP has been sent to your email.');
+      this.dataTransferService.setData('otp', this.generatedOtp);
+      this.isOtpSent = true;
+      setTimeout(() => {
+        this.resendOtpDisabled = false; 
+      }, 30000); 
+    } else {
+      alert('Failed to resend OTP. Please try again.');
+      this.resendOtpDisabled = false;
     }
   }
 }
