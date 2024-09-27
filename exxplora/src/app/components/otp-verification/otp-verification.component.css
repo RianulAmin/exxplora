@@ -82,7 +82,7 @@ body, html {
   }
   
   .error-message {
-    margin-top: 5px;
+    margin-top: 15px;
     height: 20px;
     text-align: left;
   }
@@ -90,4 +90,8 @@ body, html {
   .error-message small {
     color: red;
     font-size: 12px; 
+  }
+
+  ::ng-deep .p-button-label {
+    font-weight: normal !important;
   }

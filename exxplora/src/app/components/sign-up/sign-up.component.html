@@ -37,7 +37,6 @@
       <span class="label">Confirm Password</span>
       <input type="password" name="confirmPassword" placeholder="Re-enter password" pInputText class="input" [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" required />
       <div *ngIf="confirmPassword.invalid && confirmPassword.dirty" class="error-message">
-        <small *ngIf="confirmPassword.errors?.['required']">Confirmation password is required</small>
         <small *ngIf="!passwordsMatch()">Passwords do not match</small>
       </div>
     </div>
