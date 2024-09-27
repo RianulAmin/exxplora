@@ -21,4 +21,8 @@ export class RegistrationService {
   registerUser(registrationInfo: RegistrationInfo) : Observable<ApiResponse<RegistrationInfo>> {
     return this.http.post<ApiResponse<RegistrationInfo>>(environment.API_ENDPOINT + "registration/user", registrationInfo)
   }
+
+  isEmailExist(email: string) : Observable<ApiResponse<boolean>> {
+    return this.http.get<ApiResponse<boolean>>(environment.API_ENDPOINT + `registration/check-email-existance?email=${email}`)
+  }
 }
