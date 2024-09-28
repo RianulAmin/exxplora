@@ -1,6 +1,6 @@
 export interface ApiResponse<T> {
-    isError: boolean;
-    messages: string[];
-    data: T;
+    IsError: boolean;
+    Messages: string[];
+    Data: T;
   }
   

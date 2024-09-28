@@ -1,70 +1,96 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Domain } from '../../interfaces/domain';
+import { DomainService } from '../../services/domain.service';
+import { ProfileSetup } from '../../interfaces/profile-setup';
 
 @Component({
   selector: 'app-profile-setup',
   templateUrl: './profile-setup.component.html',
-  styleUrl: './profile-setup.component.css'
+  styleUrls: ['./profile-setup.component.css']
 })
-export class ProfileSetupComponent {
+export class ProfileSetupComponent implements OnInit {
 
   profileForm!: FormGroup;
   active: number = 0;
-  location: string = '';
-  organization: string = '';
-  institution: string = '';
-  startYear: string = '';
-  endYear: string = '';
 
-  option1: boolean | undefined = false;
-  option2: boolean | undefined = false;
-  option3: boolean | undefined = false;
-  option4: boolean | undefined = false;
-  option5: boolean | undefined = false;
-  option6: boolean | undefined = false;
-  option7: boolean | undefined = false;
-  option8: boolean | undefined = false;
-  option9: boolean | undefined = false;
-  option10: boolean | undefined = false;
+  profileSetupInfos: ProfileSetup = {
+    location: '',
+    organization: '',
+    institution: '',
+    startYear: '',
+    endYear: '',
+    isStudent: false,
+    selectedDomains: [],
+    profile: undefined,
+    cover: undefined
+  };
 
-  isStudent: boolean = false;
+  domains: Domain[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private domainService: DomainService) { }
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      location: ['', Validators.required],  
-      organization: ['', this.organizationValidator.bind(this)],  
-      institution: ['', this.institutionValidator.bind(this)], 
+      location: ['', Validators.required],
+      organization: ['', this.organizationValidator.bind(this)],
+      institution: ['', this.institutionValidator.bind(this)],
       startYear: [''],
       endYear: [''],
     });
+
+    // Fetch the domains from the service
+    this.domainService.getAllDomains().subscribe(
+      res => {
+        this.domains = res.Data;
+      },
+      error => {
+        console.error('Error:', error);
+        alert("Failed to fetch domains");
+      }
+    )
   }
 
   organizationValidator(control: any) {
-    if (!this.isStudent && !control.value) {
+    if (!this.profileSetupInfos.isStudent && !control.value) {
       return { required: true };
     }
     return null;
   }
 
   institutionValidator(control: any) {
-    if (this.isStudent && !control.value) {
+    if (this.profileSetupInfos.isStudent && !control.value) {
       return { required: true };
     }
     return null;
   }
 
   setStudentStatus(status: boolean): void {
-    this.isStudent = status;
+    this.profileSetupInfos.isStudent = status;
     this.profileForm.get('organization')?.updateValueAndValidity();
     this.profileForm.get('institution')?.updateValueAndValidity();
     this.profileForm.get('startYear')?.updateValueAndValidity();
   }
 
+  toggleDomainSelection(domainId: number): void {
+    const index = this.profileSetupInfos.selectedDomains.indexOf(domainId);
+    if (index > -1) {
+      // If domain is already selected, remove it from the array
+      this.profileSetupInfos.selectedDomains.splice(index, 1);
+    } else {
+      // If domain is not selected, add it to the array
+      this.profileSetupInfos.selectedDomains.push(domainId);
+    }
+  }
+
+  isDomainSelected(domainId: number): boolean {
+    return this.profileSetupInfos.selectedDomains.includes(domainId);
+  }
+
   onProfilePicSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
+      this.profileSetupInfos.profile = file;
       console.log("Profile picture selected:", file);
     }
   }
@@ -72,6 +98,7 @@ export class ProfileSetupComponent {
   onCoverPicSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
+      this.profileSetupInfos.cover = file;
       console.log("Cover photo selected:", file);
     }
   }
@@ -91,5 +118,9 @@ export class ProfileSetupComponent {
     } else {
       console.log('Form is invalid, please correct the errors.');
     }
+  }
+
+  handleSubmit(){
+    console.log(this.profileSetupInfos);
   }
 }

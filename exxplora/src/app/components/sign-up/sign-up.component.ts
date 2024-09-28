@@ -39,7 +39,7 @@ export class SignUpComponent {
 
       this.registrationService.isEmailExist(this.user.email).subscribe(
         async (response) => {
-          if (response.data == false) { // not exist
+          if (response.Data == false) { // not exist
             this.generatedOtp = this.generateOtp();
             const res = await this.mailService.sendOTP(this.generatedOtp, this.user.email, EmailType.CREATE_ACCOUNT_VERIFICATION);
             if (res) {
