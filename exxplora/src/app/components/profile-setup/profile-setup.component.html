@@ -53,11 +53,12 @@
                       <div *ngIf="startYearInput.invalid && startYearInput.touched" class="error">Start Year is
                         mandatory for students</div>
                     </div>
-                    <div class="endYear"></div>
+                    <div class="endYear">
                     <span class="label" style="margin-bottom: 15px;">End Year</span>
                     <div style="margin-top: 10px;">
                       <p-calendar [(ngModel)]="profileSetupInfos.endYear" view="year" dateFormat="yy" name="endYear" required
                         #endYearInput="ngModel"></p-calendar>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -83,17 +84,9 @@
           <div class="form-container">
             <div class="form-group">
               <span class="label">Profile Picture</span>
-                <p-fileUpload 
-                mode="basic" 
-                name="demo[]" 
-                chooseIcon="pi pi-upload" 
-                url="https://www.primefaces.org/cdn/api/upload.php" 
-                accept="image/*"
-                (onUpload)="onProfilePicSelected($event)" 
-                [auto]="true" 
-                chooseLabel="Browse" />
-
-                <small class="file-helper">No file chosen</small>
+              <input type="file" accept="image/*" pInputText class="input" id="selectedFile" style="margin-bottom: 15px; display: none;"/>
+                <p-button label="Browse..." onclick="document.getElementById('selectedFile').click();" />
+              <small class="file-helper">Recommended size: 400x400px</small>
             </div>
           </div>
           <div class="button-container dual-button-container">
@@ -116,17 +109,9 @@
           <div class="form-container">
             <div class="form-group">
               <span class="label">Cover Photo</span>
-              <p-fileUpload 
-                mode="basic" 
-                name="demo[]" 
-                chooseIcon="pi pi-upload" 
-                url="https://www.primefaces.org/cdn/api/upload.php" 
-                accept="image/*"
-                (onUpload)="onCoverPicSelected($event)" 
-                [auto]="true" 
-                chooseLabel="Browse"
-                 />
-              <small class="file-helper">No file chosen</small>
+                <input type="file" accept="image/*" pInputText class="input" id="selectedFile2" style="margin-bottom: 15px; display: none;"/>
+                <p-button label="Browse..." onclick="document.getElementById('selectedFile2').click();" />
+              <small class="file-helper">Recommended size: 1200x300px</small>
             </div>
           </div>
           <div class="button-container dual-button-container">
