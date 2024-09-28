@@ -21,6 +21,7 @@
     "@emailjs/browser": "^4.4.1",
     "emailjs-com": "^3.2.0",
     "ngx-infinite-scroll": "^17.0.1",
+    "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.10",
     "rxjs": "~7.8.0",
