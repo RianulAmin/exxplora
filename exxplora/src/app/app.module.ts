@@ -20,6 +20,7 @@ import { ChipsModule } from 'primeng/chips';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputOtpModule } from 'primeng/inputotp';
 import { StepperModule } from 'primeng/stepper';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,7 +72,8 @@ import { ProfileSetupComponent } from './components/profile-setup/profile-setup.
     IconFieldModule,
     InputIconModule,
     PasswordModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
