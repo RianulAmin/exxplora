@@ -1,11 +1,10 @@
 export interface ProfileSetup {
     location: string
-    organization: string
     institution: string
-    startYear: string
-    endYear: string
+    startYear: number
+    endYear: number
     isStudent: boolean
-    selectedDomains: number[]
+    domains: number[]
     profile: File | undefined
     cover: File | undefined
 }

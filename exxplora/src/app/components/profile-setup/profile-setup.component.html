@@ -31,7 +31,7 @@
                 <div class="form-group" *ngIf="!profileSetupInfos.isStudent" style="margin-top: 25px;">
                   <span class="label">Organization</span>
                   <input type="text" placeholder="e.g. Microsoft" pInputText class="input" name="organization"
-                    [(ngModel)]="profileSetupInfos.organization" required #organizationInput="ngModel" />
+                    [(ngModel)]="profileSetupInfos.institution" required #organizationInput="ngModel" />
                   <div *ngIf="organizationInput.invalid && organizationInput.touched" class="error">Organization is
                     mandatory if you're not a student</div>
                 </div>
@@ -47,7 +47,7 @@
                     <div class="startYear">
                       <span class="label" style="margin-bottom: 15px;">Start Year</span>
                       <div style="margin-top: 10px;">
-                        <p-calendar [(ngModel)]="profileSetupInfos.startYear" view="year" dateFormat="yy" name="startYear" required
+                        <p-calendar [(ngModel)]="startYear" view="year" dateFormat="yy" name="startYear" required
                           #startYearInput="ngModel"></p-calendar>
                       </div>
                       <div *ngIf="startYearInput.invalid && startYearInput.touched" class="error">Start Year is
@@ -56,7 +56,7 @@
                     <div class="endYear">
                     <span class="label" style="margin-bottom: 15px;">End Year</span>
                     <div style="margin-top: 10px;">
-                      <p-calendar [(ngModel)]="profileSetupInfos.endYear" view="year" dateFormat="yy" name="endYear" required
+                      <p-calendar [(ngModel)]="endYear" view="year" dateFormat="yy" name="endYear" required
                         #endYearInput="ngModel"></p-calendar>
                     </div>
                     </div>

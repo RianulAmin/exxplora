@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -36,6 +36,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { OtpVerificationComponent } from './components/otp-verification/otp-verification.component';
 import { ProfileSetupComponent } from './components/profile-setup/profile-setup.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,14 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
     BrowserAnimationsModule,
     CommonModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
