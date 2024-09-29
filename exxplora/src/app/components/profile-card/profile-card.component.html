@@ -1,11 +1,11 @@
 <div class="profile-card">
     <div class="profile-header">
-      <img src="../../../assets/images/cover-photo.jpg" alt="Cover Photo" class="cover-photo">
-      <img src="../../../assets/images/rianul-amin.png" alt="Profile Photo" class="profile-photo">
+      <img [src]="this.userDetails.CoverPicUrl" alt="Cover Photo" class="cover-photo">
+      <img [src]="this.userDetails.ProfilePicUrl" alt="Profile Photo" class="profile-photo">
     </div>
     <div class="profile-info">
-      <h2>Rianul Amin</h2>
-      <h4>Student at American International University-Bangladesh</h4>
-      <p>Dhaka, Bangladesh</p>
+      <h2>{{this.userDetails.FirstName + this.userDetails.LastName}}</h2>
+      <h4>{{this.userDetails.OrganizationName}}</h4>
+      <p>{{this.userDetails.Location}}</p>
     </div>
   </div>
