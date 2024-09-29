@@ -38,6 +38,7 @@ import { ProfileSetupComponent } from './components/profile-setup/profile-setup.
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/auth.service';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AuthService } from './services/auth.service';
     SignUpComponent,
     OtpVerificationComponent,
     ProfileSetupComponent,
-    SignInComponent
+    SignInComponent,
+    CreateProjectComponent
   ],
   imports: [
     BrowserModule,

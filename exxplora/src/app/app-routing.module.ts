@@ -5,6 +5,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { OtpVerificationComponent } from './components/otp-verification/otp-verification.component';
 import { ProfileSetupComponent } from './components/profile-setup/profile-setup.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'profile-setup',
     component: ProfileSetupComponent
+  },
+  {
+    path: 'create-project',
+    component: CreateProjectComponent
   }
 ];
 
