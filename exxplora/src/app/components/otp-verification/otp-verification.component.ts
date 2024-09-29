@@ -4,6 +4,8 @@ import { RegistrationInfo } from '../../interfaces/registrationInfo';
 import { RegistrationService } from '../../services/registration.service';
 import { DataTransferService } from '../../services/data-transfer.service';
 import { EmailType, MailServiceService } from '../../services/mail-service.service';
+import { AuthService } from '../../services/auth.service';
+import { Signin } from '../../interfaces/signin';
 
 
 @Component({
@@ -26,7 +28,8 @@ export class OtpVerificationComponent {
     private router: Router, 
     private registrationService: RegistrationService,
     private mailService: MailServiceService,
-    private dataTransferService: DataTransferService
+    private dataTransferService: DataTransferService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +57,22 @@ export class OtpVerificationComponent {
         (response) => {
           console.log(response.Messages);
           this.dataTransferService.clearData();
-          this.router.navigate(['/profile-setup']);
+          let signin: Signin = {
+            Email: registrationInfo.email,
+            Password: registrationInfo.password
+          }
+          this.authService.signin(signin).subscribe(
+            res => {
+              if(!res.IsError) {
+                this.authService.setToken(res.Data);
+                this.router.navigate(['/profile-setup']);
+              }
+            },
+            err => {
+              this.router.navigate(['sign-in']);
+            }
+          )
+          
         },
         (error) => {
           alert('Registration failed. Please try again.');
