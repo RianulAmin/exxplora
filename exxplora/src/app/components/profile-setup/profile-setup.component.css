@@ -136,7 +136,7 @@ body {
   }
 
 
-  .input[type="file"]::-webkit-file-upload-button {
+.input[type="file"]::-webkit-file-upload-button {
     visibility: hidden;
 }
 
@@ -152,18 +152,15 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* Remove blue outline on click */
 .input[type="file"]:focus::before {
     outline: none;
     box-shadow: none;
 }
 
-/* Optional: Change background color on hover */
 .input[type="file"]::before:hover {
-    background-color: #0056b3; /* A darker shade of blue */
+    background-color: #0056b3; 
 }
 
-/* Remove focus effect */
 .input[type="file"]:focus-visible {
     outline: none;
     box-shadow: none;
@@ -187,6 +184,9 @@ body {
     text-align: center;
     width: 150px;
     transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .toggle-group.active {

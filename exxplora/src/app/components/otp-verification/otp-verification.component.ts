@@ -53,9 +53,8 @@ export class OtpVerificationComponent {
       this.registrationService.registerUser(registrationInfo).subscribe(
         (response) => {
           console.log(response.Messages);
-          //alert('Registration successful!');
           this.dataTransferService.clearData();
-          this.router.navigate(['/success']);
+          this.router.navigate(['/profile-setup']);
         },
         (error) => {
           alert('Registration failed. Please try again.');
