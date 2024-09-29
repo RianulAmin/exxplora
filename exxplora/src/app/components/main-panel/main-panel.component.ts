@@ -9,19 +9,19 @@ export class MainPanelComponent implements AfterViewInit {
   @ViewChild('cardContainer') cardContainer!: ElementRef;
 
   cards = [
-    { title: 'Card Title 1', description: 'Short description 1', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domain-card.jpg' }
+    { title: 'Card Title 1', description: 'Short description 1', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
+    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' }
   ];
 
   ngAfterViewInit() {
