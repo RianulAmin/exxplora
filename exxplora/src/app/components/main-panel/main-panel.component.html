@@ -1,8 +1,8 @@
 <div class="card-container" #cardContainer infiniteScroll [scrollWindow]="false">
   <app-domain-card 
-    *ngFor="let card of cards"
-    [title]="card.title" 
-    [description]="card.description" 
-    [backgroundImage]="card.backgroundImage">
+    *ngFor="let card of domainCards"
+    [title]="card.Name" 
+    [description]="card.Description" 
+    [backgroundImage]="backgroundImage">
   </app-domain-card>
 </div>
