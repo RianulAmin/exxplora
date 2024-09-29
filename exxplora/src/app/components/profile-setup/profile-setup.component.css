@@ -7,6 +7,19 @@
     background-color: #F4F2EE !important;
 }
 
+.error {
+    color: red !important;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.form-group.pic {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
 .active-toggle {
     background-color: #007bff !important;
     color: white !important;

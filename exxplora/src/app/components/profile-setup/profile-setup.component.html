@@ -82,10 +82,12 @@
         </ng-template>
         <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback">
           <div class="form-container">
-            <div class="form-group">
+            <div class="form-group pic">
               <span class="label">Profile Picture</span>
-              <input type="file" accept="image/*" pInputText class="input" id="selectedFile" style="margin-bottom: 15px; display: none;"/>
-                <p-button label="Browse..." onclick="document.getElementById('selectedFile').click();" />
+              <input type="file" accept="image/*" pInputText class="input" id="selectedFile" style="margin-bottom: 15px; display: none;" (change)="onProfilePicSelected($event)"/>
+                <p-button label="Choose" onclick="document.getElementById('selectedFile').click();" />
+                <small *ngIf="profileSetupInfos.profile" class="file-helper">{{ profileSetupInfos.profile.name }}</small>
+                <small *ngIf="!profileSetupInfos.profile" class="file-helper">No file chosen</small>
               <small class="file-helper">Recommended size: 400x400px</small>
             </div>
           </div>
@@ -107,16 +109,18 @@
         </ng-template>
         <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback">
           <div class="form-container">
-            <div class="form-group">
+            <div class="form-group pic">
               <span class="label">Cover Photo</span>
-                <input type="file" accept="image/*" pInputText class="input" id="selectedFile2" style="margin-bottom: 15px; display: none;"/>
-                <p-button label="Browse..." onclick="document.getElementById('selectedFile2').click();" />
+                <input type="file" accept="image/*" pInputText class="input" id="selectedFile2" style="margin-bottom: 15px; display: none;" (change)="onCoverPicSelected($event)"/>
+                <p-button label="Choose" onclick="document.getElementById('selectedFile2').click();"/>
+                <small *ngIf="profileSetupInfos.cover" class="file-helper">{{ profileSetupInfos.cover.name }}</small>
+                <small *ngIf="!profileSetupInfos.cover" class="file-helper">No file chosen</small>
               <small class="file-helper">Recommended size: 1200x300px</small>
             </div>
           </div>
           <div class="button-container dual-button-container">
             <p-button label="Back" severity="secondary" (onClick)="prevCallback.emit()" [text]="true" />
-            <p-button label="Skip" (onClick)="nextCallback.emit()" [text]="true" />
+            <p-button [label]="profileSetupInfos.cover ? 'Next' : 'Skip'" (onClick)="nextCallback.emit()" [text]="true" />
           </div>
         </ng-template>
       </p-stepperPanel>
