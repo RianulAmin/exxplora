@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Domain } from '../../interfaces/domain';
 import { DomainService } from '../../services/domain.service';
+import { CreateProject } from '../../interfaces/create-project';
+import { ProjectService } from '../../services/project.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-project',
@@ -8,14 +11,16 @@ import { DomainService } from '../../services/domain.service';
   styleUrl: './create-project.component.css'
 })
 export class CreateProjectComponent {
-  title: string = '';
-  description: string = '';
-  deadline: Date = new Date();
-  selectedDomains: number[] = [];
+  createProjectData: CreateProject  = {
+    title: '',
+    description:'',
+    endDate: new Date(),
+    domains: [],
+  }
 
   domains: Domain[] = [];
 
-  constructor(private domainService: DomainService) {}
+  constructor(private domainService: DomainService, private projectService: ProjectService, private router: Router) {}
 
   ngOnInit(): void {
     this.domainService.getAllDomains().subscribe(
@@ -29,28 +34,42 @@ export class CreateProjectComponent {
   }
 
   toggleDomainSelection(domainId: number): void {
-    const index = this.selectedDomains.indexOf(domainId);
+    const index = this.createProjectData.domains.indexOf(domainId);
     if (index > -1) {
-      this.selectedDomains.splice(index, 1);
+      this.createProjectData.domains.splice(index, 1);
     } else {
-      this.selectedDomains.push(domainId);
+      this.createProjectData.domains.push(domainId);
     }
   }
 
   isDomainSelected(domainId: number): boolean {
-    return this.selectedDomains.includes(domainId);
+    return this.createProjectData.domains.includes(domainId);
   }
 
   onSubmit(): void {
     const projectData = {
-      title: this.title,
-      description: this.description,
-      deadline: this.deadline,
-      relatedDomains: this.selectedDomains
+      title: this.createProjectData.title,
+      description: this.createProjectData.description,
+      endDate: this.createProjectData.endDate.toISOString(),
+      domains: this.createProjectData.domains
     };
 
     console.log('Project submitted:', projectData);
-    // Implement the submission logic
+    this.projectService.createProject(projectData).subscribe(
+      res => {
+        console.log(res)
+        if(!res.IsError){
+          alert("Project Created")
+          this.router.navigate([''])
+        }
+        else {
+          alert("Failed to  create project")
+        }
+      },
+      err => {
+        alert("Error occured. " + err)
+      }
+    )
   }
 
   onCancel(): void {
