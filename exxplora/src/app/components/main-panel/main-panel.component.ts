@@ -1,36 +1,41 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Domain } from '../../interfaces/domain';
+import { DomainService } from '../../services/domain.service';
 
 @Component({
   selector: 'app-main-panel',
   templateUrl: './main-panel.component.html',
-  styleUrls: ['./main-panel.component.css'] 
+  styleUrls: ['./main-panel.component.css']
 })
-export class MainPanelComponent implements AfterViewInit {
+export class MainPanelComponent implements AfterViewInit, OnInit {
   @ViewChild('cardContainer') cardContainer!: ElementRef;
 
-  cards = [
-    { title: 'Card Title 1', description: 'Short description 1', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' },
-    { title: 'Card Title 2', description: 'Short description 2', backgroundImage: '../../assets/images/domaincard.png' }
-  ];
+  constructor(
+    private domainService: DomainService
+  ) {}
+
+  backgroundImage:string = '../../assets/images/domaincard.png';
+
+  domainCards: Domain[] = []
 
   ngAfterViewInit() {
     this.cardContainer.nativeElement.addEventListener('wheel', (event: WheelEvent) => {
-        if (event.deltaY !== 0) {
-            event.preventDefault();
-            const scrollAmount = event.deltaY > 0 ? 100 : -100; 
-            this.cardContainer.nativeElement.scrollLeft += scrollAmount; 
-        }
+      if (event.deltaY !== 0) {
+        event.preventDefault();
+        const scrollAmount = event.deltaY > 0 ? 100 : -100;
+        this.cardContainer.nativeElement.scrollLeft += scrollAmount;
+      }
     });
-}
+  }
+
+  ngOnInit(): void {
+    this.domainService.getAllDomains().subscribe(
+      res => {
+        if(!res.IsError){
+          this.domainCards = res.Data;
+          console.log(res.Data)
+        }
+      }
+    )
+  }
 }
