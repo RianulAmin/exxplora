@@ -35,6 +35,7 @@ import { DomainCardComponent } from './components/domain-card/domain-card.compon
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { OtpVerificationComponent } from './components/otp-verification/otp-verification.component';
 import { ProfileSetupComponent } from './components/profile-setup/profile-setup.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ProfileSetupComponent } from './components/profile-setup/profile-setup.
     DomainCardComponent,
     SignUpComponent,
     OtpVerificationComponent,
-    ProfileSetupComponent
+    ProfileSetupComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
