@@ -1,16 +1,18 @@
 import { ProjectService } from './../../services/project.service';
 import { Component, OnInit } from '@angular/core';
 import { ProjectInfo } from '../../interfaces/project-info';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-project-card',
   templateUrl: './project-card.component.html',
-  styleUrl: './project-card.component.css'
+  styleUrl: './project-card.component.css',
+  providers: [MessageService]
 })
 export class ProjectCardComponent implements OnInit {
   projects: ProjectInfo[] = []
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService, private messageService: MessageService) {}
 
   ngOnInit() {
     this.projectService.getAllProject().subscribe(
@@ -19,10 +21,10 @@ export class ProjectCardComponent implements OnInit {
           this.projects = res.Data;
           console.log(this.projects);
         }
-        else alert("failed to load projects")
+        this.messageService.add({ severity: 'error', summary: 'Project fetch failed', detail: "Failed to fetch project" });
       },
       err => {
-        alert("Req failed")
+        this.messageService.add({ severity: 'error', summary: 'Server Error', detail: "Failed to connect with the server" });
       }
     )
   }
