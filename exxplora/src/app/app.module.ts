@@ -22,6 +22,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { InputOtpModule } from 'primeng/inputotp';
 import { StepperModule } from 'primeng/stepper';
 import { CommonModule } from '@angular/common';
+import { TagModule } from 'primeng/tag';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +42,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/auth.service';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     ProfileSetupComponent,
     SignInComponent,
     CreateProjectComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    ProjectCardComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +86,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     PasswordModule,
     BrowserAnimationsModule,
     CommonModule,
-    ToastModule
+    ToastModule,
+    TagModule
   ],
   providers: [
     AuthService,
