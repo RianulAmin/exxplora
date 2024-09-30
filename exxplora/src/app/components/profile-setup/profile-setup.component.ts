@@ -5,11 +5,14 @@ import { Domain } from '../../interfaces/domain';
 import { DomainService } from '../../services/domain.service';
 import { ProfileSetup } from '../../interfaces/profile-setup';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-profile-setup',
   templateUrl: './profile-setup.component.html',
-  styleUrls: ['./profile-setup.component.css']
+  styleUrls: ['./profile-setup.component.css'],
+  providers: [MessageService]
+
 })
 export class ProfileSetupComponent implements OnInit {
 
@@ -32,7 +35,7 @@ export class ProfileSetupComponent implements OnInit {
 
   domains: Domain[] = [];
 
-  constructor(private fb: FormBuilder, private domainService: DomainService, private profileSetupService: ProfileSetupService, private router: Router) { }
+  constructor(private fb: FormBuilder, private domainService: DomainService, private profileSetupService: ProfileSetupService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
@@ -50,7 +53,7 @@ export class ProfileSetupComponent implements OnInit {
       },
       error => {
         console.error('Error:', error);
-        alert("Failed to fetch domains");
+        this.messageService.add({ severity: 'error', summary: 'Domain fetch failed', detail: "Failed to fetch domains" });
       }
     )
   }
@@ -123,47 +126,82 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   handleSubmit() {
-    console.log(this.startYear.getFullYear())
-    console.log(this.endYear.getFullYear())
+    console.log(this.startYear.getFullYear());
+    console.log(this.endYear.getFullYear());
     console.log(this.profileSetupInfos);
-
+  
+    // Set start and end years based on isStudent flag
     if (this.profileSetupInfos.isStudent) {
       this.profileSetupInfos.startYear = this.startYear.getFullYear();
       this.profileSetupInfos.endYear = this.endYear.getFullYear();
-    }
-    else {
+    } else {
       this.profileSetupInfos.startYear = 0;
       this.profileSetupInfos.endYear = 0;
     }
-
+  
     this.profileSetupService.setupProfileInfo(this.profileSetupInfos).subscribe(
       (res) => {
         if (!res.IsError) {
-          if(this.profileSetupInfos.profile){
+  
+          if (this.profileSetupInfos.profile) {
             this.profileSetupService.setupProfilePhoto(this.profileSetupInfos.profile).subscribe(
-              res => {
-                if (!res.IsError) {
-                  if(this.profileSetupInfos.cover){
-                    this.profileSetupService.setupCoverPhoto(this.profileSetupInfos.cover).subscribe(
-                      res => {
-                        if (!res.IsError) {
-                          this.router.navigate(['/home'])
-                        }
-                        else alert("Cover photo failed to upload \n" + res.Messages )
-                      }
-                    )
-                  }
+              (profileRes) => {
+                if (!profileRes.IsError) {
+                  console.log('Profile photo uploaded successfully');
+                } else {
+                  this.messageService.add({
+                    severity: 'error',
+                    summary: 'Upload Failed',
+                    detail: "Profile photo failed to upload \n" + profileRes.Messages,
+                  });
                 }
-                else alert("photo failed to upload \n" + res.Messages )
+              },
+              (err) => {
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Upload Failed',
+                  detail: "Profile photo upload error: " + err.message,
+                });
               }
-            )
+            );
           }
+  
+          if (this.profileSetupInfos.cover) {
+            this.profileSetupService.setupCoverPhoto(this.profileSetupInfos.cover).subscribe(
+              (coverRes) => {
+                if (!coverRes.IsError) {
+                  console.log('Cover photo uploaded successfully');
+                } else {
+                  this.messageService.add({
+                    severity: 'error',
+                    summary: 'Upload Failed',
+                    detail: "Cover photo failed to upload \n" + coverRes.Messages,
+                  });
+                }
+              },
+              (err) => {
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Upload Failed',
+                  detail: "Cover photo upload error: " + err.message,
+                });
+              }
+            );
+          }
+  
+          this.router.navigate(['/home']);
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Upload Failed',
+            detail: "File upload failed \n" + res.Messages,
+          });
         }
-        else alert("Failed to update");
       },
-      err => {
+      (err) => {
         console.log(err);
       }
-    )
+    );
   }
+  
 }

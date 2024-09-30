@@ -6,13 +6,16 @@ import { DataTransferService } from '../../services/data-transfer.service';
 import { EmailType, MailServiceService } from '../../services/mail-service.service';
 import { AuthService } from '../../services/auth.service';
 import { Signin } from '../../interfaces/signin';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-otp-verification',
   templateUrl: './otp-verification.component.html',
-  styleUrl: './otp-verification.component.css'
+  styleUrl: './otp-verification.component.css',
+  providers: [MessageService]
 })
+
 export class OtpVerificationComponent {
 
   otpInput: string = '';
@@ -29,11 +32,15 @@ export class OtpVerificationComponent {
     private registrationService: RegistrationService,
     private mailService: MailServiceService,
     private dataTransferService: DataTransferService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private messageService: MessageService
+  ) {
+    this.messageService.add({ severity: 'success', summary: 'OTP send', detail: 'A new OTP has been sent to your email.' });
+  }
 
   ngOnInit(): void {
     this.generatedOtp = this.dataTransferService.getData('otp');
+
     const userInfo = this.dataTransferService.getData('userInfo');
     if (userInfo) {
       this.email = userInfo.email;
@@ -45,7 +52,8 @@ export class OtpVerificationComponent {
 
   async handleSubmit() {
     if (this.otpInput === this.generatedOtp) {
-      alert('OTP verified successfully!');
+      this.messageService.add({ severity: 'success', summary: 'Verification Successful', detail: 'OTP verified successfully' });
+
       const registrationInfo = {
         firstName: this.firstName,
         lastName: this.lastName,
@@ -75,11 +83,12 @@ export class OtpVerificationComponent {
           
         },
         (error) => {
-          alert('Registration failed. Please try again.');
+          alert('');
+          this.messageService.add({ severity: 'error', summary: 'Ragistration Failed', detail: 'Registration failed. Please try again.' });
         }
       );
     } else {
-      alert('Invalid OTP');
+      this.messageService.add({ severity: 'error', summary: 'Wrong OTP', detail: 'Your otp is inncorrect' });
     }
   }
 
@@ -88,14 +97,14 @@ export class OtpVerificationComponent {
     this.generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();  
     const res = await this.mailService.sendOTP(this.generatedOtp, this.email, EmailType.CREATE_ACCOUNT_VERIFICATION);
     if (res) {
-      alert('A new OTP has been sent to your email.');
+      this.messageService.add({ severity: 'success', summary: 'OTP send', detail: 'A new OTP has been sent to your email.' });
       this.dataTransferService.setData('otp', this.generatedOtp);
       this.isOtpSent = true;
       setTimeout(() => {
         this.resendOtpDisabled = false; 
       }, 30000); 
     } else {
-      alert('Failed to resend OTP. Please try again.');
+      this.messageService.add({ severity: 'error', summary: 'OTP send failed', detail: 'Failed to resend OTP. Please try again.' });
       this.resendOtpDisabled = false;
     }
   }
