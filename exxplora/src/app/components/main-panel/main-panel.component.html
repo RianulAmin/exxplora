@@ -8,7 +8,9 @@
     *ngFor="let card of domainCards"
     [title]="card.Name" 
     [description]="card.Description" 
-    [backgroundImage]="backgroundImage">
+    [backgroundImage]="backgroundImage"
+    [id]="card.Id"
+    >
   </app-domain-card>
 </div>
 <app-project-card></app-project-card>

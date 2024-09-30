@@ -18,8 +18,8 @@ export class DomainService {
     return this.http.get<ApiResponse<Domain[]>>(environment.API_ENDPOINT + "domain")
   }
 
-  getProjectsByDomainId(id: number) : Observable<ApiResponse<ProjectInfo[]>> {
-    return this.http.get<ApiResponse<ProjectInfo[]>>(environment.API_ENDPOINT + "domain/" + id)
+  getProjectsCountByDomainId(id: number) : Observable<ApiResponse<any>> {
+    return this.http.get<ApiResponse<any>>(environment.API_ENDPOINT + "domain/projects/count/" + id)
   }
 
 }
