@@ -3,11 +3,13 @@ import { Router } from '@angular/router';
 import { EmailType, MailServiceService } from '../../services/mail-service.service';
 import { RegistrationService } from '../../services/registration.service';
 import { DataTransferService } from '../../services/data-transfer.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
+  providers: [MessageService]
 })
 export class SignUpComponent {
 
@@ -25,7 +27,8 @@ export class SignUpComponent {
     private router: Router,
     private registrationService: RegistrationService,
     private mailService: MailServiceService,
-    private dataTransferService: DataTransferService
+    private dataTransferService: DataTransferService,
+    private messageService: MessageService
   ) { }
 
   generateOtp = () => {
@@ -52,20 +55,20 @@ export class SignUpComponent {
               });
               this.router.navigate(['/otp-verification']);
             } else {
-              alert('Failed to send OTP. Please try again.');
+              this.messageService.add({ severity: 'error', summary: 'OTP send failed', detail: 'Failed to send OTP. Please try again.' });
             }
           }
           else {
-            alert('Email already exist. Please use other email to proceed');
+            this.messageService.add({ severity: 'warn', summary: 'Invalid Email', detail: 'Please enter a unique email. ' + this.user.email + " is already exist in the system" });
           }
         },
         (error) => {
-          alert('Failed to check email existance.');
+          this.messageService.add({ severity: 'error', summary: 'Server Error', detail: 'Failed to check email existance.' });
         }
       )
 
     } else {
-      alert('Please ensure all fields are filled correctly and passwords match.');
+      this.messageService.add({ severity: 'error', summary: 'Invalid input', detail: 'Please ensure all fields are filled correctly and passwords match.' });
     }
   }
 
