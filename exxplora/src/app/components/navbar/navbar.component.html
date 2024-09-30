@@ -2,8 +2,8 @@
     <div class="navbar-brand">
     </div>
     <div class="navbar-auth">
-      <a href="#" class="auth-link login">Login</a>
-      <a href="#" class="auth-link logout">Logout</a>
+      <a href="#" *ngIf="!this.isLoggedin" class="auth-link login">Login</a>
+      <a href="#" *ngIf="this.isLoggedin" (click)="logout()" class="auth-link logout">Logout</a>
     </div>
   </nav>
   

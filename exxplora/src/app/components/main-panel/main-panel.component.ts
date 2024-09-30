@@ -13,7 +13,7 @@ export class MainPanelComponent implements AfterViewInit, OnInit {
 
   constructor(
     private domainService: DomainService,
-    private router: Router
+    private router: Router,
   ) {}
 
   toCreateProject() {

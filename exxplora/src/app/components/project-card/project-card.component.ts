@@ -2,6 +2,7 @@ import { ProjectService } from './../../services/project.service';
 import { Component, OnInit } from '@angular/core';
 import { ProjectInfo } from '../../interfaces/project-info';
 import { MessageService } from 'primeng/api';
+import { DomainService } from '../../services/domain.service';
 
 @Component({
   selector: 'app-project-card',
@@ -18,7 +19,7 @@ export class ProjectCardComponent implements OnInit {
     this.projectService.getAllProject().subscribe(
       res => {
         if(!res.IsError) {
-          this.projects = res.Data;
+          this.projects = res.Data.reverse();
           console.log(this.projects);
         }
         this.messageService.add({ severity: 'error', summary: 'Project fetch failed', detail: "Failed to fetch project" });
