@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastModule } from 'primeng/toast';
 import { PasswordModule } from 'primeng/password';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -39,6 +40,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/auth.service';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { CreateProjectComponent } from './components/create-project/create-proje
     OtpVerificationComponent,
     ProfileSetupComponent,
     SignInComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import { CreateProjectComponent } from './components/create-project/create-proje
     PasswordModule,
     BrowserAnimationsModule,
     CommonModule,
+    ToastModule
   ],
   providers: [
     AuthService,

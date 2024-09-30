@@ -6,11 +6,20 @@ import { OtpVerificationComponent } from './components/otp-verification/otp-veri
 import { ProfileSetupComponent } from './components/profile-setup/profile-setup.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: LandingPageComponent
+  },
+  {
+    path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'create-project',
+    component: CreateProjectComponent
   },
   {
     path: 'sign-up',

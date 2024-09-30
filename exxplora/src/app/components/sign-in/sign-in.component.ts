@@ -29,9 +29,8 @@ export class SignInComponent {
       this.authService.signin(this.user).subscribe(
         res => {
           if(res.IsError == false) {
-            alert("Token: " + res.Data);
             this.authService.setToken(res.Data);
-            this.router.navigate(['']);
+            this.router.navigate(['/home']);
           }
           else alert("Invalid Credentials");
         },

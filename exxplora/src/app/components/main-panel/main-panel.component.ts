@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { Domain } from '../../interfaces/domain';
 import { DomainService } from '../../services/domain.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-panel',
@@ -11,8 +12,13 @@ export class MainPanelComponent implements AfterViewInit, OnInit {
   @ViewChild('cardContainer') cardContainer!: ElementRef;
 
   constructor(
-    private domainService: DomainService
+    private domainService: DomainService,
+    private router: Router
   ) {}
+
+  toCreateProject() {
+    this.router.navigate(['/create-project']);
+  }
 
   backgroundImage:string = '../../assets/images/domaincard.png';
 

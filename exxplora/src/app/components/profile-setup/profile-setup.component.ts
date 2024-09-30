@@ -79,10 +79,8 @@ export class ProfileSetupComponent implements OnInit {
   toggleDomainSelection(domainId: number): void {
     const index = this.profileSetupInfos.domains.indexOf(domainId);
     if (index > -1) {
-      // If domain is already selected, remove it from the array
       this.profileSetupInfos.domains.splice(index, 1);
     } else {
-      // If domain is not selected, add it to the array
       this.profileSetupInfos.domains.push(domainId);
     }
   }
@@ -129,8 +127,6 @@ export class ProfileSetupComponent implements OnInit {
     console.log(this.endYear.getFullYear())
     console.log(this.profileSetupInfos);
 
-
-
     if (this.profileSetupInfos.isStudent) {
       this.profileSetupInfos.startYear = this.startYear.getFullYear();
       this.profileSetupInfos.endYear = this.endYear.getFullYear();
@@ -151,7 +147,7 @@ export class ProfileSetupComponent implements OnInit {
                     this.profileSetupService.setupCoverPhoto(this.profileSetupInfos.cover).subscribe(
                       res => {
                         if (!res.IsError) {
-                          this.router.navigate([''])
+                          this.router.navigate(['/home'])
                         }
                         else alert("Cover photo failed to upload \n" + res.Messages )
                       }
